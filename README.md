@@ -1,1 +1,10 @@
-# Crawling-Cafe-Sales1
+# Crawling-cafe-sales
+
+
+## 카페 판매 게시글 크롤링 협업 프로젝트
+ + 참여자
+  > 이진호
+  > 김대근
+  > 이호석
+  > 신상우
+
