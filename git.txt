@@ -1,0 +1,69 @@
+< 간단한 협업 초기설정 >
+
+최초에 원하는 폴더에 git clone [URL] 로 클론시킴(이 떄 자동으로 git remote가 추가됨)
+원하지 않으면 git init 이후 리모트 따로 추가하고 pull해도됨.
+
+이후 master브랜치로 초기 파일들을 업로드함.
+
+
+< 팀원들의 초기설정 >
+1. 각각 자신이 사용할 브랜치를 만든다.
+  > git branch [branch명]
+  > git checkout [branch명]
+  >> git checkout -b <branch> (한번에 실행)
+ 
+ 이후 ❯ git push -u origin lhs3 명령어로 원격저장소에 브랜치를 푸쉬한다. (파일없이도 가능)
+
+2. master의 최신 파일들을 각각 브랜치로 받아온다.
+  > git checkout [branch명]
+  > git pull origin master 또는 > git merge master
+  > git push origin [branch 명] (깃허브에 업데이트사항을 보여주기 위해)
+
+
+< 팀원들이 파일을 업로드 할 때 >
+
+1. 팀원들이 각각의 브랜치로 코드를 수정하고 업로드 해야함
+  > git checkout [branch명] (이미 HEAD브랜치가 옮겨져있으면 안해도됨)
+  > git add [파일명]
+  > git commit -m "커밋 사항"
+  > git push origin [branch명]
+s
+2. 수정된 각 브랜치들의 파일을 master에서 병합해야함
+ > git checkout master
+ > git merge [branch명] (여러 브랜치만큼 반복함)
+   >> 보통 이럴때 fast-forward(깃 커밋이 master브랜치 커밋보다 다른 브랜치의 커밋이 앞서있는 상황)
+   >> 하지만 여러 브랜치들을 병합하는 과정에서 동일한 부분을 수정하는 경우가 생기면 conflict 발생함
+   >> conflict 발생시 HEAD는 현재 자신이 접속한 브랜치  HEAD아래의 코드는 병합하려는 브랜치에서 작성된 코드 이는 팀원들과 상의해서 둘 중에 어떤 코드를 사용할지 정해야함
+
+3. 그 외에 conflict 상황
+ master의 코드를 수정하고 커밋을하고 다른 브랜치 코드를 수정하고 커밋을 한다.
+이후 master브랜치로 돌아가 git merge [브랜치명] 을 시도하면 conflict 즉 merge 명령어 실행 충돌이 발생함
+참고 >> https://victorydntmd.tistory.com/78
+
+
+<아래는 위의 블로그의 글 발췌>
+
+따라서 Git은 사용자에게 어떤 branch의 내용을 선택할 것인지 제시합니다.
+
+merge를 진행했던 기준 브랜치는 master 이므로 <<<< HEAD 영역이 master 브랜치의 내용을 의미합니다.
+
+<<<<< HEAD 
+
+
+
+=========
+
+
+
+만약 협업 과정에서 이러한 충돌이 발생했을 경우에는 동료들과 함께 충돌을 해결해야 합니다.
+
+코드를 비교해 가면서 필요 없는 코드를 일일이 지우는 작업이죠.
+
+이는 귀찮은 작업이기 때문에 최대한 작업 내용이 겹치지 않도록 하는 것이 좋습니다.
+
+
+
+이렇게 충돌이 발생한 후, 해결이 됐으면 commit을 하면 됩니다.
+
+
+
